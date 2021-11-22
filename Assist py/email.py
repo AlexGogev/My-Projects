@@ -77,7 +77,7 @@ www.realpython.com"""
 html = """\
 <html>
   <body>
-    <p>Gaden spam haha 
+    <p> Text in email 
     </p>
   </body>
 </html>
