@@ -48,7 +48,7 @@ print(Pizzastatic._circlearea(3))
 import smtplib
 
 server = smtplib.SMTP_SSL('smtp.aol.com', 465)
-server.login('aagogev@aol.com', 'bdmqzkprugzftlxz')
+server.login('v@aol.com', 'pass')
 message = "hello this is tst"
 
 print("done")
