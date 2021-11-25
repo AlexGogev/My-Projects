@@ -37,3 +37,4 @@ while game_is_on:
         scorboard.increase_level()
 
 screen.exitonclick()
+

@@ -40,6 +40,7 @@ while game_is_on:
     if ball.xcor() > 380:
         ball.reset_possition()
         score.l_point()
+        
 
     #detect l mill
     if ball.xcor() < -380:
@@ -47,3 +48,4 @@ while game_is_on:
         score.r_point()
 
 screen.exitonclick()
+
