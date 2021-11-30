@@ -26,7 +26,7 @@ calc(4, multiply=5, add=5)
 class Car:
     def __init__(self, **kwargs):
         self.doors = kwargs["doors"]
-        self.color = kwargs.get("color")
+        self.color = kwargs.get("color") # if not provided -> .get returns None
 
-toyota = Car(doors=4, )
+toyota = Car(doors=4, color="silver")
 print(toyota.color)
