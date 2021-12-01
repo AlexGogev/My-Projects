@@ -20,7 +20,6 @@ def button_clicked():
     text = inputing.get()
     label["text"]  = text
     
-    return label
 
 
 
