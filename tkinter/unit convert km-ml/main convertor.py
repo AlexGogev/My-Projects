@@ -23,7 +23,7 @@ km.grid(column =2 , row=2)
 def convert():
     miles_to_convert = miles.get()
     new_val = int(miles_to_convert) * 1.60934
-    equal_to["text"] = new_val
+    equal_to["text"] = round(new_val, 3)
 
 
 button = tkinter.Button(text="Calculate", command= convert)
