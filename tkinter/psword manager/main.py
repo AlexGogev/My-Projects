@@ -1,6 +1,27 @@
 import tkinter
 import time
+from tkinter import messagebox
+import pyperclip
+import random
+
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+rand_pass = []
+password = ""
+def generate_password():
+
+    for i in range(8):
+        rand_pass.append(random.choice(letters))
+    for i in range(2):    
+        rand_pass.append(random.choice(symbols))
+        rand_pass.append(random.choice(symbols))
+    password= "".join(rand_pass)
+    password_entry.insert(0, password) 
+    pyperclip.copy(password)
+    
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
@@ -15,10 +36,15 @@ def save_it():
         email = email_entry.get()
         paswd= password_entry.get()
 
-        filetext.write(f"web: {web} |  email: {email} | pass: {paswd} \n")
-        website_entry.delete(0, "end")
-        password_entry.delete(0, "end")
-        create_label()
+        is_ok = messagebox.askokcancel(title=web, message=f'There are details \nEmail: {email} \nPassword: {paswd} \nOk to save? ' ) #checkbox #messagebox import
+        if is_ok==True and len(web) > 0 and len(email) > 0 and len(paswd) >0:
+            filetext.write(f"web: {web} |  email: {email} | pass: {paswd} \n")
+            website_entry.delete(0, "end")
+            password_entry.delete(0, "end")
+            create_label()
+            rand_pass.clear() 
+        else:
+            messagebox.showinfo(title="Error", message="Cannot be blank")
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tkinter.Tk()
@@ -51,7 +77,7 @@ email_entry.grid(row=2, column=1, columnspan=2)
 password_entry.grid(row=3, column=1, )
 
 #buttons
-generate_pass = tkinter.Button(text="Generate password")
+generate_pass = tkinter.Button(text="Generate password", command=generate_password)
 generate_pass.grid(row=3, column=2)
 add_button = tkinter.Button(text="Add", width=36, command=save_it)
 add_button.grid(row=4, column=1,columnspan=2)
