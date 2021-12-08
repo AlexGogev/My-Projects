@@ -3,10 +3,22 @@ import time
 from tkinter import messagebox
 import pyperclip
 import random
+import json
+#write dump(), reed load(), update update()
 
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+# ---------------------------- SEARCH GENERATOR ------------------------------- #
+def search():
+    try:
+        with open("pass.json" ,"r") as json_file:
+            data = json.load(json_file)
+        
+        messagebox.showinfo(title="Details", message=f'Email: {data[website_entry.get()]["email"]} \nPassword:{data[website_entry.get()]["password"]}\nPassword copied to clipboard')
+        pyperclip.copy(data[website_entry.get()]["password"])
+    except KeyError:
+        messagebox.showinfo(title="No info", message="Not avalable")
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 rand_pass = []
@@ -31,20 +43,51 @@ def create_label():
     
 
 def save_it():
-    with open("pass.txt","a") as filetext:
-        web = website_entry.get()
-        email = email_entry.get()
-        paswd= password_entry.get()
+    web = website_entry.get()
+    email = email_entry.get()
+    paswd= password_entry.get()
+    new_data = {
+        web: {
+        "email":email,
+        "password":paswd
+        }
+    }
+    
+    if len(web) > 0 and len(email) > 0 and len(paswd) >0:
+            
+        #load data
+        try:
+            with open("pass.json","r") as data_file:
+                #reeding old data
+                data = json.load(data_file)
+                
+           
+        except FileNotFoundError:
+            #save data or create file ("w")
+            with open("pass.json", "w") as data_file:
+                #saving updated data
+                json.dump(new_data, data_file, indent=4)
 
-        is_ok = messagebox.askokcancel(title=web, message=f'There are details \nEmail: {email} \nPassword: {paswd} \nOk to save? ' ) #checkbox #messagebox import
-        if is_ok==True and len(web) > 0 and len(email) > 0 and len(paswd) >0:
-            filetext.write(f"web: {web} |  email: {email} | pass: {paswd} \n")
+                website_entry.delete(0, "end")
+                password_entry.delete(0, "end")
+                create_label()
+                rand_pass.clear()
+        else:
+            #update data
+            data.update(new_data)
+            with open("pass.json", "w") as data_file:
+                
+                #saving updated data
+                json.dump(data, data_file, indent=4)
+
+        finally:
             website_entry.delete(0, "end")
             password_entry.delete(0, "end")
             create_label()
-            rand_pass.clear() 
-        else:
-            messagebox.showinfo(title="Error", message="Cannot be blank")
+            rand_pass.clear()
+
+    else:
+        messagebox.showinfo(title="Error", message="Cannot be blank")
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tkinter.Tk()
@@ -65,25 +108,29 @@ email_label.grid(row=2, column=0)
 password_label.grid(row=3, column=0)
 
 
-website_entry = tkinter.Entry(width=55)
+website_entry = tkinter.Entry(width=36)
 website_entry.focus() #focus cursor on startup
+search_button = tkinter.Button(text="Search", width=15, command=search)
 
 email_entry = tkinter.Entry(width=55)
 email_entry.insert(0, "myemail@aol.com") #2 parameters -> index and string
-password_entry= tkinter.Entry(width=37)
+password_entry= tkinter.Entry(width=36)
 
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry.grid(row=1, column=1)
+search_button.grid(row=1, column=2)     
 email_entry.grid(row=2, column=1, columnspan=2)
 password_entry.grid(row=3, column=1, )
 
 #buttons
 generate_pass = tkinter.Button(text="Generate password", command=generate_password)
 generate_pass.grid(row=3, column=2)
-add_button = tkinter.Button(text="Add", width=36, command=save_it)
-add_button.grid(row=4, column=1,columnspan=2)
+add_button = tkinter.Button(text="Add", width=26, command=save_it)
+add_button.grid(row=4, column=0,columnspan=3, pady=15, padx=15)
 
 
 
 
 
 window.mainloop()
+
+

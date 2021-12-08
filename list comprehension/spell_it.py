@@ -9,14 +9,14 @@ user_list = []
 
 
 spelled = []
-
-for i in user:
-    for b in nato_list:
-        if i == b[0]:
-            spelled.append(b)
-
+def spell():
+    for i in user:
+        for b in nato_list:
+            if i == b[0]:
+                spelled.append(b)
 
 
 #print(user_list)
+spell()
 spelled = ", ".join(spelled)
 print(spelled)
