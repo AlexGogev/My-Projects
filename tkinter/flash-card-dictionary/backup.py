@@ -1,34 +1,29 @@
 from tkinter import *
 import pandas
 import random
-import os 
 
 BACKGROUND_COLOR = "#B1DDC6"
 current_card = {}
 to_learn = {}
 
-to_learn_lang = "Spanish"
-source = "Spanish"
+to_learn_lang = "Bulgarian"
+source = "Bulgarian"
 data = pandas.read_csv(f"data/{to_learn_lang}.csv")
 
 
 def switch_es():
     global source, to_learn_lang, data
     source = "Spanish"
-    to_learn_lang= "words_to_learn_Spanish"
+    to_learn_lang= "words_to_learn_spanish"
     data = pandas.read_csv("data/Spanish.csv")
-    print(data)
     
     
 def switch_bg():
     global source, to_learn_lang, data
     source = "Bulgarian"
-    to_learn_lang= "words_to_learn_Bulgarian"
+    to_learn_lang= "words_to_learn_bulgarian"
     data = pandas.read_csv("data/Bulgarian.csv")
-    os.startfile("C:/Users/Alex/Desktop/My-Projects/tkinter/flash-card-dictionary/backup.py")
-    quit()
     
-   
 
 
 try:
@@ -46,12 +41,9 @@ else:
 def next_card():
     global current_card, flip_timer
     window.after_cancel(flip_timer)
-    
     current_card = random.choice(to_learn)
-
     canvas.itemconfig(card_title, text =f"{source}", fill="black")
-    canvas.itemconfig(card_word, text =current_card[f"{source}"], fill="black")  
-
+    canvas.itemconfig(card_word, text =current_card[f"{source}"], fill="black")
     canvas.itemconfig(card_background, image=card_front_img)
     flip_timer =window.after(3000, func=flip_card)
 
@@ -63,8 +55,7 @@ def flip_card():
 def is_known():
     to_learn.remove(current_card)
     data =pandas.DataFrame(to_learn)
-    datata = data.to_csv(f"data/words_to_learn_{source}.csv", index=False)
-    
+    data.to_csv(f"data/words_to_learn_{source}.csv", index=False)
     next_card()
 
 

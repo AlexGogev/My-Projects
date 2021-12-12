@@ -1,4 +1,6 @@
-with open("spanish.txt", "r") as text:
+#https://github.com/hermitdave/FrequencyWords/tree/master/content/2018
+
+with open("bulgarian.txt", "r") as text:
     words = text.readlines()
 
 words = "".join(words)
@@ -14,6 +16,6 @@ for i in words:
 list_words = "".join(list_words)
 
 
-with open("esp.txt", "w") as text:
+with open("bg.txt", "w") as text:
     text.write(list_words)
 
