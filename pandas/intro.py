@@ -29,7 +29,7 @@ print(data)
 print(data["temp"].to_list())
 
 #data.frame is all table
-#series is the colomb like a list
+#series is the colunm like a list
 
 data_dict  = data.to_dict()
 print(data_dict)
