@@ -1,0 +1,6 @@
+http://api-doc.axesso.de/#api-Amazon-GetProductInformation
+https://stackoverflow.com/questions/18095879/is-there-amazon-com-api-for-products
+https://www.youtube.com/watch?v=Ma_eLdobmlM
+
+ebay trading api
+https://linuxconfig.org/introduction-to-ebay-api-with-python-the-trading-api-part-3
