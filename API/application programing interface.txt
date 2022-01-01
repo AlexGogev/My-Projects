@@ -1,3 +1,4 @@
+json formater online - > http://jsonviewer.stack.hu/
 http://api-doc.axesso.de/#api-Amazon-GetProductInformation
 https://stackoverflow.com/questions/18095879/is-there-amazon-com-api-for-products
 https://www.youtube.com/watch?v=Ma_eLdobmlM
