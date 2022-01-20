@@ -1,3 +1,4 @@
+#string manipulation https://medium.com/@Alexander_H/removing-characters-before-after-and-in-the-middle-of-strings-fb4930cce76a
 import random
 
 
