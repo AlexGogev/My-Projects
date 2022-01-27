@@ -1,18 +1,26 @@
-class Animal:
+class Parent:
+    def __init__(self, name, age):
+        self.name = name.capitalize()
+        self.age = int(age)
+
+    def __str__(self):
+        return f'{self.name} is {self.age}'
+
+
+class Child(Parent):
+    def __init__(self, name, age, pet):
+        super().__init__(name, age)
+        self.pet = pet
+
+    def __str__(self):
+        return f"{super().__str__()} her pet is {self.pet}"
+
+
+bibo = Child("alison", 35, "mimi")
+
+print(bibo)
+
+
+class new:
     def __init__(self):
-        self.eyes = 2
-        print("hi I am animal")
-    
-    def greet(self):
         print("hello")
-
-class Cat(Animal):
-    def __init__(self):
-        super().__init__()
-            
-    def greet(self):
-        super().greet()
-        print("Meow")
-
-mimi = Cat()
-mimi.greet()
